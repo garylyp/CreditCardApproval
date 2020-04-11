@@ -16,11 +16,11 @@ replaced = record.replace({'STATUS' : {
     'X' : 0,
     'C' : 0,
     '0' : 0,
-    '1' : 0,
-    '2' : 1,
-    '3' : 1,
-    '4' : 1,
-    '5' : 1}})
+    '1' : 1,
+    '2' : 2,
+    '3' : 3,
+    '4' : 4,
+    '5' : 5}})
 record_group_id = replaced.groupby(['ID'])
 status_targets = pd.DataFrame(record_group_id['STATUS'].agg(max))
 begin_month=pd.DataFrame(record_group_id['MONTHS_BALANCE'].agg(min))
@@ -28,4 +28,4 @@ begin_month=pd.DataFrame(record_group_id['MONTHS_BALANCE'].agg(min))
 new_data=pd.merge(df,begin_month,on="ID")
 new_data=pd.merge(new_data, status_targets,on='ID')
 
-new_data.to_csv('./data/final_clean_version.csv', index=False)
+new_data.to_csv('./data/final_status_preserve.csv', index=False)
